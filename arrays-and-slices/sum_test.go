@@ -1,8 +1,11 @@
 package arrays_and_slices
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
-func TestHello(t *testing.T) {
+func TestSum(t *testing.T) {
 
 	t.Run("random size collection", func(t *testing.T) {
 		numbers := []int{1, 2, 3}
@@ -15,4 +18,15 @@ func TestHello(t *testing.T) {
 		}
 	})
 
+}
+
+func TestSumAll(t *testing.T) {
+	t.Run("counting sum for variabe number of collections", func(t *testing.T) {
+		got := SumAll([]int{2, 4}, []int{3, 6})
+		want := []int{6, 9}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %d, wanted %d", got, want)
+		}
+	})
 }

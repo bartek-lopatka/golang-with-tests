@@ -1,6 +1,9 @@
 package pointers_and_errors
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Bitcoin float64
 type Wallet struct {
@@ -13,12 +16,17 @@ func (w *Wallet) Deposit(amount Bitcoin) {
 
 }
 
-func (w *Wallet) Balance() Bitcoin {
-	return w.balance
+func (w *Wallet) Withdraw(amount Bitcoin) error {
+	if amount > w.balance {
+		return errors.New("Oh no, not enough funds to withdraw")
+	}
+
+	w.balance -= amount
+	return nil
 }
 
-type Stringer interface {
-	String() string
+func (w *Wallet) Balance() Bitcoin {
+	return w.balance
 }
 
 func (b Bitcoin) String() string {
